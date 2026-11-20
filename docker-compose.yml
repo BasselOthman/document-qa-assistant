@@ -1,0 +1,29 @@
+services:
+  rag-assistant:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: document-qa-assistant
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - PORT=8000
+    volumes:
+      # Persistent volume for local Chroma vector database
+      - chroma-data:/app/data/chroma
+      # Bind mount for document PDFs and BM25 index
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  chroma-data:
+    driver: local

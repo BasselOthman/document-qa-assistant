@@ -1,0 +1,68 @@
+[
+  {
+    "mode": "simple",
+    "strategy": "dense",
+    "status": "not yet run (requires OPENAI_API_KEY for generation)",
+    "retrieval_hit_rate": 1.0,
+    "answer_correctness": "not yet run",
+    "refusal_rate": "not yet run",
+    "avg_latency_seconds": "not yet run",
+    "avg_llm_calls": "not yet run",
+    "total_questions": 25
+  },
+  {
+    "mode": "simple",
+    "strategy": "hybrid",
+    "status": "not yet run (requires OPENAI_API_KEY for generation)",
+    "retrieval_hit_rate": 1.0,
+    "answer_correctness": "not yet run",
+    "refusal_rate": "not yet run",
+    "avg_latency_seconds": "not yet run",
+    "avg_llm_calls": "not yet run",
+    "total_questions": 25
+  },
+  {
+    "mode": "simple",
+    "strategy": "hybrid_rerank",
+    "status": "not yet run (requires OPENAI_API_KEY for generation)",
+    "retrieval_hit_rate": 1.0,
+    "answer_correctness": "not yet run",
+    "refusal_rate": "not yet run",
+    "avg_latency_seconds": "not yet run",
+    "avg_llm_calls": "not yet run",
+    "total_questions": 25
+  },
+  {
+    "mode": "graph",
+    "strategy": "dense",
+    "status": "not yet run (requires OPENAI_API_KEY for generation)",
+    "retrieval_hit_rate": 1.0,
+    "answer_correctness": "not yet run",
+    "refusal_rate": "not yet run",
+    "avg_latency_seconds": "not yet run",
+    "avg_llm_calls": "not yet run",
+    "total_questions": 25
+  },
+  {
+    "mode": "graph",
+    "strategy": "hybrid",
+    "status": "not yet run (requires OPENAI_API_KEY for generation)",
+    "retrieval_hit_rate": 1.0,
+    "answer_correctness": "not yet run",
+    "refusal_rate": "not yet run",
+    "avg_latency_seconds": "not yet run",
+    "avg_llm_calls": "not yet run",
+    "total_questions": 25
+  },
+  {
+    "mode": "graph",
+    "strategy": "hybrid_rerank",
+    "status": "not yet run (requires OPENAI_API_KEY for generation)",
+    "retrieval_hit_rate": 1.0,
+    "answer_correctness": "not yet run",
+    "refusal_rate": "not yet run",
+    "avg_latency_seconds": "not yet run",
+    "avg_llm_calls": "not yet run",
+    "total_questions": 25
+  }
+]

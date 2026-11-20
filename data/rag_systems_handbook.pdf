@@ -1,0 +1,187 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 1404 >>
+stream
+BT
+/F1 11 Tf
+14.5 TL
+50 750 Td
+(RAG SYSTEMS ENGINEERING HANDBOOK) Tj T*
+(Page 1: Architecture and Parametric Memory) Tj T* T*
+T*
+(Retrieval-Augmented Generation \(RAG\) is an architectural pattern that bridges large) Tj T*
+(language models with external, authoritative knowledge bases. Standard LLMs suffer) Tj T*
+(from two core limitations: outdated training cutoffs and hallucinations when queried) Tj T*
+(on proprietary information. RAG mitigates this by decoupling parametric memory) Tj T*
+(\(model weights\) from non-parametric memory \(external vector indexes\).) Tj T*
+T*
+(The document processing pipeline begins with document ingestion. Raw documents such as) Tj T*
+(PDF manuals are loaded page by page and segmented using recursive character splitting.) Tj T*
+(In this system, documents are split into chunks of 800 characters with a 150 character) Tj T*
+(overlap. The 150-character overlap preserves semantic context across sentence boundaries,) Tj T*
+(preventing truncated thoughts from degrading retrieval quality.) Tj T*
+T*
+(Deterministic chunk identifiers are calculated using SHA-256 hashing over the document) Tj T*
+(source name, page number, chunk index, and content snippet. This guarantees idempotent) Tj T*
+(ingestion, preventing duplicate vectors when the ingestion command is executed repeatedly.) Tj T*
+(Local Chroma vector store stores these chunks persistently on disk.) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 1187 >>
+stream
+BT
+/F1 11 Tf
+14.5 TL
+50 750 Td
+(RAG SYSTEMS ENGINEERING HANDBOOK) Tj T*
+(Page 2: Dense vs Sparse Retrieval and Hybrid Fusion) Tj T* T*
+T*
+(Dense vector embeddings and sparse lexical search serve complementary retrieval goals.) Tj T*
+(Dense retrieval maps text to dense semantic vectors using the BAAI/bge-small-en-v1.5) Tj T*
+(embedding model. It excels at semantic similarity, conceptual search, and matching) Tj T*
+(synonyms, but struggles with exact alphanumeric strings like serial numbers and error codes.) Tj T*
+T*
+(Conversely, sparse lexical search uses the BM25 algorithm based on term frequency and) Tj T*
+(inverse document frequency \(TF-IDF\). BM25 guarantees precision for exact keyword queries,) Tj T*
+(technical identifiers, and uncommon acronyms.) Tj T*
+T*
+(The hybrid retrieval strategy combines both approaches using EnsembleRetriever with) Tj T*
+(Reciprocal Rank Fusion \(RRF\). Equal weighting coefficients of 0.5 for BM25 and 0.5 for) Tj T*
+(dense vector retrieval yield optimal recall across diverse query patterns.) Tj T*
+(The BM25 index is built from the exact same text chunks stored in Chroma and is rebuilt) Tj T*
+(whenever new documents are ingested.) Tj T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 6 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+8 0 obj
+<< /Length 1210 >>
+stream
+BT
+/F1 11 Tf
+14.5 TL
+50 750 Td
+(RAG SYSTEMS ENGINEERING HANDBOOK) Tj T*
+(Page 3: Cross-Encoder Reranking and Latency Characteristics) Tj T* T*
+T*
+(First-stage retrieval systems prioritize high recall by scanning thousands of documents) Tj T*
+(in sub-millisecond time. However, vector cosine similarity ignores cross-token interaction) Tj T*
+(between the query and document passages.) Tj T*
+T*
+(To maximize precision, the hybrid_rerank strategy employs a two-stage retrieval pipeline.) Tj T*
+(Stage one retrieves an expanded candidate pool of 15 candidate passages using hybrid search.) Tj T*
+(Stage two passes these candidates through a cross-encoder model, specifically the) Tj T*
+(Xenova/ms-marco-MiniLM-L-6-v2 model executed locally via FastEmbed ONNX runtime.) Tj T*
+T*
+(The cross-encoder concatenates the query and passage as a single input sequence, allowing) Tj T*
+(all-to-all cross-attention across tokens. This reranks passages by true relevance scores.) Tj T*
+(The top 4 highest-scoring passages are forwarded to the language model.) Tj T*
+(While reranking adds approximately 35 milliseconds of CPU latency, it substantially) Tj T*
+(improves precision and reduces extraneous context tokens.) Tj T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 8 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+10 0 obj
+<< /Length 1428 >>
+stream
+BT
+/F1 11 Tf
+14.5 TL
+50 750 Td
+(RAG SYSTEMS ENGINEERING HANDBOOK) Tj T*
+(Page 4: Corrective RAG Workflow and LangGraph Routing) Tj T* T*
+T*
+(Standard RAG chains blindly pass retrieved chunks to the generator even when the) Tj T*
+(retriever fails. Corrective RAG \(CRAG\) introduces self-reflection and dynamic routing) Tj T*
+(implemented via a LangGraph StateGraph state machine.) Tj T*
+T*
+(The state machine tracks: question, current_query, documents, relevant boolean, answer,) Tj T*
+(rewrites counter, and an audit trail of executed steps.) Tj T*
+(Execution begins at START, flowing to the retrieve node, followed by the grade_documents node.) Tj T*
+(The grade_documents node makes ONE structured LLM call to assess whether the context) Tj T*
+(is sufficient to answer the user inquiry.) Tj T*
+T*
+(Conditional routing evaluates the grading result:) Tj T*
+(1. If relevant is true, control transitions immediately to the generate node.) Tj T*
+(2. If relevant is false and rewrites is less than MAX_REWRITES \(default 1\), control routes) Tj T*
+(to rewrite_query, which optimizes the query string and loops back to retrieve.) Tj T*
+(3. If relevant is false and rewrites reaches MAX_REWRITES, control transitions to fallback.) Tj T*
+(The fallback node makes ZERO LLM calls, returning an honest refusal statement that the) Tj T*
+(requested information was not found, preventing hallucinations and conserving token budget.) Tj T*
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 10 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+12 0 obj
+<< /Length 1290 >>
+stream
+BT
+/F1 11 Tf
+14.5 TL
+50 750 Td
+(RAG SYSTEMS ENGINEERING HANDBOOK) Tj T*
+(Page 5: Production Deployment, Observability, and Experiment Tracking) Tj T* T*
+T*
+(Production document Q&A services require robust observability and auditability.) Tj T*
+(Every HTTP request to POST /ask is processed through structured logging middleware.) Tj T*
+(The middleware outputs a single JSON log line containing: request_id, endpoint, mode,) Tj T*
+(strategy, latency_ms, retrieved_chunks count, llm_calls count, graph steps, and HTTP status.) Tj T*
+(API keys and authorization credentials are scrubbed and never recorded in logs.) Tj T*
+T*
+(Experimentation and evaluation metrics are systematically tracked using MLflow in ./mlruns.) Tj T*
+(Key evaluation dimensions include: retrieval hit rate, keyword correctness on answerable) Tj T*
+(questions, refusal rate on unanswerable questions, average latency, and average LLM calls.) Tj T*
+T*
+(For containerized deployment, the application runs inside Docker based on python:3.11-slim.) Tj T*
+(A dedicated non-root user \(appuser\) executes the Uvicorn ASGI server on port 8000.) Tj T*
+(Embedding and reranker models are downloaded at image build time to ensure the container) Tj T*
+(can boot and operate reliably in air-gapped production environments.) Tj T*
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 12 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000147 00000 n 
+0000000217 00000 n 
+0000001673 00000 n 
+0000001799 00000 n 
+0000003038 00000 n 
+0000003164 00000 n 
+0000004426 00000 n 
+0000004552 00000 n 
+0000006033 00000 n 
+0000006161 00000 n 
+0000007504 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+7632
+%%EOF

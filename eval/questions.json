@@ -1,0 +1,202 @@
+[
+  {
+    "id": "q1",
+    "question": "What does Retrieval-Augmented Generation bridge language models with?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 1,
+    "expected_keywords": ["external", "knowledge", "bases"]
+  },
+  {
+    "id": "q2",
+    "question": "What are the two core limitations of standard large language models identified in the handbook?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 1,
+    "expected_keywords": ["outdated", "cutoffs", "hallucinations"]
+  },
+  {
+    "id": "q3",
+    "question": "What two types of memory are decoupled by the RAG architecture?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 1,
+    "expected_keywords": ["parametric", "non-parametric", "memory"]
+  },
+  {
+    "id": "q4",
+    "question": "What are the configured chunk size and chunk overlap used in document splitting?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 1,
+    "expected_keywords": ["800", "150", "overlap"]
+  },
+  {
+    "id": "q5",
+    "question": "Why is a 150-character chunk overlap applied during recursive splitting?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 1,
+    "expected_keywords": ["preserve", "semantic", "context"]
+  },
+  {
+    "id": "q6",
+    "question": "How are deterministic chunk identifiers calculated to guarantee idempotent ingestion?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 1,
+    "expected_keywords": ["SHA-256", "hashing", "duplicate"]
+  },
+  {
+    "id": "q7",
+    "question": "Which local embedding model is utilized for dense semantic retrieval?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 2,
+    "expected_keywords": ["BAAI/bge-small-en-v1.5", "dense", "embedding"]
+  },
+  {
+    "id": "q8",
+    "question": "In what search scenarios does dense vector retrieval excel?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 2,
+    "expected_keywords": ["semantic", "similarity", "synonyms"]
+  },
+  {
+    "id": "q9",
+    "question": "What algorithm is used for sparse lexical keyword search?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 2,
+    "expected_keywords": ["BM25", "lexical", "keyword"]
+  },
+  {
+    "id": "q10",
+    "question": "What statistics does the BM25 retrieval algorithm calculate?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 2,
+    "expected_keywords": ["term", "frequency", "inverse"]
+  },
+  {
+    "id": "q11",
+    "question": "How does the hybrid retrieval strategy fuse dense and sparse search rankings?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 2,
+    "expected_keywords": ["EnsembleRetriever", "Reciprocal", "Rank"]
+  },
+  {
+    "id": "q12",
+    "question": "What are the ensemble weights assigned to BM25 and dense retrieval in the hybrid configuration?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 2,
+    "expected_keywords": ["0.5", "BM25", "dense"]
+  },
+  {
+    "id": "q13",
+    "question": "Why does standard vector cosine similarity fail to model cross-token interactions?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 3,
+    "expected_keywords": ["cross-token", "interaction", "ignores"]
+  },
+  {
+    "id": "q14",
+    "question": "How many candidate passages are retrieved in stage one of the hybrid_rerank strategy?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 3,
+    "expected_keywords": ["15", "candidate", "passages"]
+  },
+  {
+    "id": "q15",
+    "question": "Which cross-encoder model is executed locally via FastEmbed for reranking?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 3,
+    "expected_keywords": ["Xenova/ms-marco-MiniLM-L-6-v2", "cross-encoder"]
+  },
+  {
+    "id": "q16",
+    "question": "How many top-scoring passages are forwarded to the language model after cross-encoder reranking?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 3,
+    "expected_keywords": ["top", "4", "passages"]
+  },
+  {
+    "id": "q17",
+    "question": "What is the CPU latency overhead introduced by cross-encoder reranking over 15 candidates?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 3,
+    "expected_keywords": ["35", "milliseconds", "latency"]
+  },
+  {
+    "id": "q18",
+    "question": "What state elements are tracked across nodes in the Corrective RAG LangGraph workflow?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 4,
+    "expected_keywords": ["question", "current_query", "documents", "steps"]
+  },
+  {
+    "id": "q19",
+    "question": "How many LLM calls does the grade_documents node make during state execution?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 4,
+    "expected_keywords": ["ONE", "structured", "call"]
+  },
+  {
+    "id": "q20",
+    "question": "What is the maximum query rewrites threshold before the workflow routes to fallback?",
+    "expect_refusal": false,
+    "expected_source": "rag_systems_handbook.pdf",
+    "expected_page": 4,
+    "expected_keywords": ["MAX_REWRITES", "1", "fallback"]
+  },
+  {
+    "id": "q21",
+    "question": "What is the secret root API token for the company's AWS production cluster?",
+    "expect_refusal": true,
+    "expected_source": null,
+    "expected_page": null,
+    "expected_keywords": []
+  },
+  {
+    "id": "q22",
+    "question": "How many quantum computing physical qubits are required to train the BAAI embedding model?",
+    "expect_refusal": true,
+    "expected_source": null,
+    "expected_page": null,
+    "expected_keywords": []
+  },
+  {
+    "id": "q23",
+    "question": "What was the exact net revenue of Anthropic PBC during the third fiscal quarter of 2021?",
+    "expect_refusal": true,
+    "expected_source": null,
+    "expected_page": null,
+    "expected_keywords": []
+  },
+  {
+    "id": "q24",
+    "question": "How do you configure a Redis cache cluster with multi-region active-active CRDT replication in this repository?",
+    "expect_refusal": true,
+    "expected_source": null,
+    "expected_page": null,
+    "expected_keywords": []
+  },
+  {
+    "id": "q25",
+    "question": "Who is the executive head chef managing the lunch cafeteria at the corporate headquarters?",
+    "expect_refusal": true,
+    "expected_source": null,
+    "expected_page": null,
+    "expected_keywords": []
+  }
+]
