@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "document-qa-assistant"
+version = "1.0.0"
+description = "Production Document Q&A Assistant featuring FastAPI, LangChain, LangGraph Corrective RAG, and MLflow."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Bassel Othman" }
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    "ignore::DeprecationWarning:langchain_community.*:",
+    "ignore::DeprecationWarning:pytest_asyncio.*:"
+]
